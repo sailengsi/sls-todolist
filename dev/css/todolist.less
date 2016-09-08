@@ -1,0 +1,70 @@
+body,
+h1{
+	text-align: center;
+}
+.pd{
+	padding: 0px;
+}
+.todo-btn-container{
+	margin-top: 10px;
+}
+.todo-container{
+	margin-top: 30px;
+}
+.todo-form{
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+.todo-list{
+	.todo-li{
+		position: relative;
+		&:hover{
+			.todo-delete{
+				display: inline-block;
+			}
+		}
+	}
+	.todo-li-finished{
+		.todo-content{
+			text-decoration:line-through;
+			color: #ccc;
+		}
+	}
+
+	.todo-span{
+		width: 42px;
+		height: 42px;
+		cursor: pointer;
+		display: inline-block;
+		text-align: center;
+		position: absolute;
+		top:0px;
+	}
+	.todo-check{
+		left:0px;
+		line-height: 42px;
+	}
+	.todo-delete{
+		line-height: 36px;
+		text-align: center;
+		font-size: 26px;
+		font-weight: bold;
+		float: right;
+		
+		right:0px;
+		display: none;
+	}
+}
+
+
+.todo-tip{
+	height: 42px;
+	font-size: 20px;
+	line-height: 42px;
+	display: none;
+	position: fixed;
+	top: 0px;
+	width: 50%;
+	left: 25%;
+	z-index: 999;
+}

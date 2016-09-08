@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <link rel="import" href="./tpls/header.html?__inline" />
+        <title>todolist-vue</title>
+    </head>
+    <body>
+    	<div class="container" id="managerTodo">
+            <div class="row">
+                <div class="col-sm-12">
+                	<!-- 错误提示 -->
+                    <p class="todo-tip"></p>
+                    <div class="col-sm-6 col-sm-offset-2 pd">
+                        <div class="col-sm-12 todo-container pd">
+							<!-- 版本切换 -->
+                            <link rel="import" href="./tpls/versionToggle.html?__inline" />
+                            <div class="clear clearfix"></div>
+
+                            <!-- 表单 -->
+                            <div class="col-sm-12 todo-form pd">
+                                <div class="col-sm-8 col-xs-9 pd">
+                                    <input type="text" class="form-control col-sm-8 col-xs-9 todo-input" v-model="todoValue" value="" placeholder="回车也可提交" v-on:keyup.enter="addTodo()">
+                                </div>
+                                <div class="btn btn-info col-sm-4 col-xs-3 todo-btn-add" v-on:click="addTodo()">添加</div>
+                            </div> 
+                            <div class="clear clearfix"></div>
+
+                            <!-- 按钮 -->
+                            <div class="col-sm-12 pd todo-btn-container">
+                                <button type="button" class="btn btn-{{toggleAllTodo ? 'default' : 'info'}} col-sm-2 col-xs-6" v-on:click="finishAllTodo()">全选/不选</button>
+                                <button type="button" class="btn btn-danger col-sm-3 col-xs-6" v-on:click="clearFinishedTodo()">清空已完成</button>
+
+                                <button type="button" class="btn btn-{{filter==='all' ? 'info' : 'default'}} col-sm-2 col-xs-4" v-on:click="filterTodo('all')">所有(<span class="todo-total" v-text="allTotal"></span>)</button>
+                                <button type="button" class="btn btn-{{filter==='finished' ? 'info' : 'default'}} col-sm-2 col-xs-4" v-on:click="filterTodo('finished')">已完成(<span class="todo-finish-total" v-text="finishTotal"></span>)</button>
+                                <button type="button" class="btn btn-{{filter==='nofinish' ? 'info' : 'default'}} col-sm-3 col-xs-4" v-on:click="filterTodo('nofinish')">未完成(<span class="todo-nofinish-total" v-text="noFinishTotal"></span>)</button>
+                            </div>
+                            <div class="clear clearfix"></div>
+
+                            <!-- 列表 -->
+                            <ul class="list-group todo-list">
+                                <li class="list-group-item todo-li {{todo.status===true ? 'todo-li-finished' : ''}}" v-if="(filter === 'finished' && todo.status) || (filter === 'nofinish' && !todo.status) || filter === 'all'" v-for="todo in todoList">
+                                    <label class="todo-span todo-check">
+                                        <input type="checkbox" class="todo-btn-check" value="" v-model="todo.status" v-on:click="changeStatusTodo($index)">
+                                    </label>
+                                    <span class="todo-content" v-text="todo.name"></span>
+                                    <span class="todo-span todo-delete text-danger todo-btn-delete" v-on:click="deleteTodo($index)">x</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	<script src="libs/store/store.js"></script>
+    	<script src="libs/vue/vue.js"></script>
+    	<script src="js/vue-app.js"></script>
+    </body>
+</html>
